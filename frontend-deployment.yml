@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: demo-guestbook-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: frontend-app-pod
+      app: demo-guestbook-app
+  template:
+    metadata:
+      name: frontend-pod
+      labels:
+        name: frontend-pod
+        app: demo-guestbook-app
+
+    spec:
+      containers:
+        - name: frontend-app
+          image: gcr.io/google-samples/gb-frontend:v4
+          ports:
+            - containerPort: 80
